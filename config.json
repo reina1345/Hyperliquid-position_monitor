@@ -1,5 +1,4 @@
 {
     "addresses": [],
-    "discord_token": "YOUR_DISCORD_TOKEN_HERE",
-    "channel_id": 0
+    "webhook_url": "https://discord.com/api/webhooks/1453935740680540282/u80XawbnUZk7FBxMz6BcSAhZv-siJ2Q-pRYsHr7tDNdJrNa8OV1JmRSseggP08dOfvYf"
 }

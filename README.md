@@ -1,8 +1,8 @@
-# Hyperliquid Position Notifier Bot
+# Hyperliquid Position Notifier Bot (Webhook Version)
 
-This is a Discord bot that monitors Hyperliquid positions for specified addresses and sends notifications for:
+This is a script that monitors Hyperliquid positions for specified addresses and sends notifications via a Discord Webhook for:
 - Position Open
-- Position Close
+- Position Close / Flip
 - Periodic Status Report (every 1 hour)
 
 ## Setup
@@ -14,18 +14,28 @@ This is a Discord bot that monitors Hyperliquid positions for specified addresse
 
 2. **Configuration**
    - Open `config.json`.
-   - Set `"discord_token"` to your Discord Bot Token.
-   - (Optional) Set `"channel_id"` if you want notifications to go to a specific channel automatically. Otherwise, you might need to configure the bot to use the channel where commands are issued (implementation detail).
-   - You can manually add addresses to `"addresses"` list or use the Discord commands.
+   - Set `"webhook_url"` to your Discord Webhook URL.
+   - Add the addresses you want to monitor to the `"addresses"` list manually.
+     ```json
+     {
+         "addresses": [
+             "0xF59079E159130dA804ac3b2ea2D24c9d683AEc2A",
+             "0xANOTHER_ADDRESS"
+         ],
+         "webhook_url": "https://discord.com/api/webhooks/..."
+     }
+     ```
 
-3. **Run the Bot**
+3. **Run the Monitor**
    ```bash
-   python bot.py
+   python monitor.py
    ```
 
-## Commands
+## Features
 
-- `!add <address>`: Add an address to monitor.
-- `!remove <address>`: Remove an address from monitoring.
-- `!list`: List all monitored addresses.
-- `!status`: Force a status report immediately.
+- **Real-time Monitoring**: Checks positions every 1 minute.
+- **Notifications**:
+  - 🚨 **OPENED**: New position detected.
+  - ✅ **CLOSED**: Position closed.
+  - 🔄 **FLIPPED**: Position flipped (e.g., Long to Short).
+- **Periodic Report**: Sends a summary of all open positions every hour.

@@ -5,13 +5,13 @@ CONFIG_FILE = "config.json"
 
 def load_config():
     if not os.path.exists(CONFIG_FILE):
-        return {"addresses": [], "discord_token": "", "channel_id": 0}
+        return {"addresses": [], "webhook_url": ""}
 
     with open(CONFIG_FILE, "r") as f:
         try:
             return json.load(f)
         except json.JSONDecodeError:
-            return {"addresses": [], "discord_token": "", "channel_id": 0}
+            return {"addresses": [], "webhook_url": ""}
 
 def save_config(config):
     with open(CONFIG_FILE, "w") as f:
@@ -37,15 +37,6 @@ def get_addresses():
     config = load_config()
     return config.get("addresses", [])
 
-def get_discord_token():
+def get_webhook_url():
     config = load_config()
-    return config.get("discord_token", "")
-
-def set_channel_id(channel_id: int):
-    config = load_config()
-    config["channel_id"] = channel_id
-    save_config(config)
-
-def get_channel_id():
-    config = load_config()
-    return config.get("channel_id", 0)
+    return config.get("webhook_url", "")
